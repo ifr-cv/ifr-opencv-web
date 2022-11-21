@@ -1,7 +1,6 @@
 <script lang="ts">
   import {
     FillTaskBlank,
-    GetTaskArgTypeDefault,
     planNameRegex,
     TaskArgType,
     type PlanInfo,

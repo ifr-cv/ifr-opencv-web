@@ -1,3 +1,5 @@
+import Big from 'big.js';
+
 export const keys = <K extends string>(data: Record<K, any>) => Object.keys(data) as K[];
 /**
  * 延时函数, 默认1ms
@@ -26,4 +28,16 @@ export const remSubObj = (data: any) => {
     a[k1] = b;
   }
   return a;
+};
+
+export const avg = (...datas: number[]) => {
+  let sum = Big(0);
+  datas.map((x) => Big(x)).forEach((x) => (sum = sum.add(x)));
+  return sum.div(datas.length).toNumber();
+};
+
+export const sum = (...datas: number[]) => {
+  let sum = Big(0);
+  datas.map((x) => Big(x)).forEach((x) => (sum = sum.add(x)));
+  return sum.toNumber();
 };

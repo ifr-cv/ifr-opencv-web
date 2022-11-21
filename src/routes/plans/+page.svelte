@@ -7,7 +7,7 @@
   import Spinner from '$components/Spinner.svelte';
   import { API_BASE_KEY, getLS } from '$def/common';
   import { isNoBaseSettingError } from '$def/errors';
-  import type { PlanState, TaskDescriptions } from '$def/Task';
+  import { stateInfo, type PlanState, type TaskDescriptions } from '$def/Task';
   import { toBaseSetting, toPlanPage } from '$lib/api/paes';
   import {
     getPlanInfo,
@@ -34,11 +34,11 @@
     if (flushing || !browser) return;
     flushing = true;
     try {
-      if (bad) return;
       try {
         state = await getPlanState();
         if (!noList) list = await listPlanInfo();
         if (!descriptions) descriptions = await getTaskDescriptions();
+        bad = null;
       } catch (err) {
         bad = err;
         throw err;
@@ -66,7 +66,7 @@
 
   onMount(() => {
     flush();
-    const timer = setInterval(() => bad || flush(true), 1000);
+    const timer = setInterval(() => flush(true), 1000);
     return () => clearInterval(timer);
   });
 </script>
@@ -100,6 +100,7 @@
                 </span>
               {/if}
             </a>
+            , 状态: {state.state} - {stateInfo[state.state]}
             <br />
             目前 {browser ? getLS(API_BASE_KEY) : ''} 共存在 {list.length} 个流程
           </p>

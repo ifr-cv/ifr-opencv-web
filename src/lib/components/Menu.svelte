@@ -18,6 +18,7 @@
         { href: '/plans/new', name: '新建流程' },
       ],
     },
+    time: { href: '/time', name: '耗时' },
     info: { href: '/info', name: '信息' },
     api: { href: '/api', name: '后端接口' },
   };
@@ -30,7 +31,9 @@
         data.task.extra?.push(...list.map((name) => ({ href: `/plans/edit/${name}`, name })));
         data = data;
       });
-    } catch (err) {}
+    } catch (err) {
+      console.error(err);
+    }
   }
 </script>
 

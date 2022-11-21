@@ -43,6 +43,8 @@ export type PlanState = {
   current: string;
   /**选中的流程是否在运行 */
   running: boolean;
+  /**当前流程状态id */
+  state: number;
 };
 
 /**
@@ -100,6 +102,15 @@ export type TaskDescriptions = {
   /**任务名 */
   [k in string]: TaskDescription;
 };
+
+/**状态描述 */
+export const stateInfo: Record<number, string> = {
+  0: '等待阶段',
+  1: '初始化阶段',
+  2: '运行阶段',
+  3: '停止阶段',
+  4: '清理阶段',
+} as const;
 
 /**流程名称正则表达式 */
 export const planNameRegex = /^[a-zA-Z][0-9a-zA-Z_-]*$/;
