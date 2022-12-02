@@ -19,6 +19,7 @@
       ],
     },
     time: { href: '/time', name: '耗时' },
+    vars: { href: '/vars', name: '变量' },
     info: { href: '/info', name: '信息' },
     api: { href: '/api', name: '后端接口' },
   };

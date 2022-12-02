@@ -36,3 +36,12 @@
 {:else}
   <LoadingHero />
 {/if}
+
+<style lang="scss">
+  li.list-group-item {
+    cursor: pointer;
+    &:not(.active):hover {
+      background-color: rgba($color: #000000, $alpha: 0.05);
+    }
+  }
+</style>

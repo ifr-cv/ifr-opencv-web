@@ -12,6 +12,11 @@ export const API_P_HTTP_KEY = `${COMMON_PREFIX}-api-P-HTTP`;
 /**API的WS协议(localStorge) */
 export const API_P_WS_KEY = `${COMMON_PREFIX}-api-P-WS`;
 
+/**vars是否显示详细信息 */
+export const API_VARS_SHOW_DETAIL = `${COMMON_PREFIX}-vars-show-detail`;
+/**vars是否显示附加图像 */
+export const API_VARS_SHOW_IMG = `${COMMON_PREFIX}-vars-show-img`;
+
 /**网站名称 */
 export const WEB_NAME = 'IFR 感知组调试终端';
 

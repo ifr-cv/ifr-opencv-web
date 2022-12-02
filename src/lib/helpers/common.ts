@@ -41,3 +41,9 @@ export const sum = (...datas: number[]) => {
   datas.map((x) => Big(x)).forEach((x) => (sum = sum.add(x)));
   return sum.toNumber();
 };
+
+export function flip(data: Record<string, string>): Record<string, string> {
+  const r: any = {};
+  for (const k in data) r[data[k]] = k;
+  return r;
+}
