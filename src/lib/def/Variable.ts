@@ -46,7 +46,6 @@ export type VarDescriptions = {
   types: Record<cppTypes, string>;
   /**所有变量 */
   vars: {
-    editable: boolean;
     group: string;
     type: string;
     name: string;

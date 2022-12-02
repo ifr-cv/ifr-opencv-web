@@ -43,10 +43,6 @@
 {#if type && value}
   变量: <span class="fs-2 text-secondary">{value.group}</span> <span class="fs-5">::</span>
   <span class="fs-2">{value.name}</span><br />
-  可编辑:
-  <span class="fs-5" class:text-success={value.editable} class:text-danger={!value.editable}>
-    {value.editable ? '是' : '否'}
-  </span><br />
   类型:
   <span class="fs-5 text-nowrap overflow-hidden">
     {#if types[value.type]}
@@ -104,9 +100,8 @@
       max={value.max}
       step={stepVar(type)}
       bind:value={val}
-      disabled={!value.editable}
     />
-    <input type="text" class="w-100" bind:value={val} disabled={!value.editable} />
+    <input type="text" class="w-100" bind:value={val} />
   {/if}
 {/if}
 

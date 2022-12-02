@@ -78,7 +78,6 @@
                 type="button"
                 class="btn btn-primary btn-sm"
                 on:click={() => (values[i] = parseVar(type, value.def))}
-                disabled={!value.editable}
               >
                 重置
               </button>
@@ -91,9 +90,8 @@
                 max={value.max}
                 step={stepVar(type)}
                 bind:value={values[i]}
-                disabled={!value.editable}
               />
-              <input type="text" bind:value={values[i]} disabled={!value.editable} />
+              <input type="text" bind:value={values[i]} />
             </td>
           </tr>
         {/each}
