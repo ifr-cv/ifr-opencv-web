@@ -2,7 +2,12 @@
   import LoadingHero from '$components/LoadingHero.svelte';
   import { getTimeWatcherList } from '$lib/api/time';
   import { browser } from '$app/environment';
+  import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
   import TimeGraph from './TimeGraph.svelte';
+  import { isNoBaseSettingError } from '$def/errors';
+  import { toBaseSetting } from '$lib/api/paes';
+  import ErrorHero from '$components/ErrorHero.svelte';
 
   let select: string;
 </script>
@@ -32,6 +37,12 @@
         </div>
       </div>
     </div>
+  {:catch err}
+    {#if isNoBaseSettingError(err)}
+      {goto(toBaseSetting($page.url.pathname))}
+    {:else}
+      <ErrorHero description={err} />
+    {/if}
   {/await}
 {:else}
   <LoadingHero />

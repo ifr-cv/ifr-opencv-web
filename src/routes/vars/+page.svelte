@@ -1,9 +1,13 @@
 <script lang="ts">
   import { browser } from '$app/environment';
+  import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
   import ErrorHero from '$components/ErrorHero.svelte';
   import LoadingHero from '$components/LoadingHero.svelte';
   import { API_BASE_KEY, API_VARS_SHOW_DETAIL, API_VARS_SHOW_IMG } from '$def/common';
+  import { isNoBaseSettingError } from '$def/errors';
   import { loadStorage, saveStorage } from '$def/LocalStorge';
+  import { toBaseSetting } from '$lib/api/paes';
   import { getVarsDescriptions, isVarsEnable } from '$lib/api/vars';
   import DetailPage from './DetailPage.svelte';
   import ListPage from './ListPage.svelte';
@@ -61,6 +65,12 @@
         此设备未启用网页调参功能(可能由于C++标准低于C++17)<br />
         设备: {localStorage.getItem(API_BASE_KEY)}
       </ErrorHero>
+    {/if}
+  {:catch err}
+    {#if isNoBaseSettingError(err)}
+      {goto(toBaseSetting($page.url.pathname))}
+    {:else}
+      <ErrorHero description={err} />
     {/if}
   {/await}
 {/if}
