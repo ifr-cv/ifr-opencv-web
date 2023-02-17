@@ -1,0 +1,30 @@
+# 这个工作流程文件可以让你在推送到master分支时，
+# 自动将master分支合并到vercel-deploy分支
+
+name: Update Vercel Deploy # 工作流程的名称
+
+on: # 触发器
+  push: # 当有推送事件时
+    branches: # 只监听以下分支
+      - master # 源分支
+      
+permissions:
+  # Need `contents: read` to checkout the repository
+  # Need `contents: write` to merge branches
+  contents: write
+
+jobs: # 任务
+  update-vercel-deploy: # 任务的名称
+    name: Merge master into vercel-deploy after a PR is merged
+    runs-on: ubuntu-latest # 运行环境
+    steps: # 步骤
+      - name: Checkout # 步骤的名称
+        uses: actions/checkout@v2 # 使用actions/checkout操作来获取仓库代码
+        with:
+          fetch-depth: 0 # Let's get all the branches
+      - name: Merge master to vercel-deploy branch # 步骤的名称
+        uses: devvspaces/merge-branches@v1
+        with:
+          token: ${{ github.token }}
+          from_branch: master  # 源分支名称
+          to_branch: vercel-deploy  # 目标分支名称
