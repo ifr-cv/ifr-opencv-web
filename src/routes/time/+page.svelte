@@ -10,19 +10,28 @@
   import ErrorHero from '$components/ErrorHero.svelte';
 
   let select: string;
+  const prepare = (list: string[]) => {
+    return select ? select : list && list.length ? list[0] : '';
+  };
 </script>
 
 {#if browser}
   {#await getTimeWatcherList()}
     <LoadingHero />
   {:then list}
-    {((select = list[0]) && '') || ''}
+    {(select = prepare(list)) || ''}
     <div class="container">
       <div class="row">
         <div class="col-md-2 col-12">
           <ul class="list-group">
             {#each list as type}
-              <li class="list-group-item" class:active={select === type}>{type}</li>
+              <li
+                class="list-group-item"
+                class:active={select === type}
+                on:click={() => (select = type)}
+              >
+                {type}
+              </li>
             {:else}
               <li class="list-group-item">无运行中的时间监控</li>
             {/each}
